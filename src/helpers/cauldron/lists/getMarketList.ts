@@ -5,6 +5,7 @@ import { getMainParams } from "@/helpers/cauldron/getMainParams";
 import type { CauldronConfig } from "@/configs/cauldrons/configTypes";
 import { getUserPositions } from "@/helpers/cauldron/getUserPositions";
 import type { MainParams, UserPositions } from "@/helpers/cauldron/types";
+import { log } from "console";
 
 export type CauldronListItem = {
   apr: { value: number; multiplier: number };
@@ -34,6 +35,7 @@ export const getMarketList = async (
   chains = null
 ): Promise<CauldronListItem[]> => {
   const curentChains = chains ? chains : Object.keys(defaultRpc);
+  log("curentChains", curentChains);
 
   const cauldronsInfo: CauldronListItem[] = [];
 

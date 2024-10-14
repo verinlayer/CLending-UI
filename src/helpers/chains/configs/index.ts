@@ -11,6 +11,8 @@ import { mainnetConfig } from "@/helpers/chains/configs/mainnet";
 import { moonriverConfig } from "@/helpers/chains/configs/moonriver";
 import { optimismConfig } from "@/helpers/chains/configs/optimism";
 import { polygonConfig } from "@/helpers/chains/configs/polygon";
+import {testnetAvalanceConfig} from "@/helpers/chains/configs/testnetAvax";
+
 
 export const chainsConfigs = [
   mainnetConfig,
@@ -26,4 +28,5 @@ export const chainsConfigs = [
   baseConfig,
   lineaConfig,
   beraBartioConfig,
+  testnetAvalanceConfig,
 ];

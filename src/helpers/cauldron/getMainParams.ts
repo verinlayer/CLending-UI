@@ -5,6 +5,7 @@ import type { MainParams } from "@/helpers/cauldron/types";
 import { getPublicClient } from "@/helpers/chains/getChainsInfo";
 import { getLensAddress } from "@/helpers/cauldron/getLensAddress";
 import type { CauldronConfig } from "@/configs/cauldrons/configTypes";
+import { log } from "console";
 
 interface MarketInfoResponse {
   result: {
@@ -38,6 +39,10 @@ export const getMainParams = async (
   cauldron?: CauldronContractConfig | undefined
 ): Promise<Array<MainParams>> => {
   const lensAddress = getLensAddress(chainId);
+  log("lensAddress", lensAddress);
+  log("chainId", chainId);
+  console.log("lensAddress", lensAddress);
+  console.log("chainId", chainId);
   const publicClient = getPublicClient(chainId);
 
   const marketInfo: MarketInfoResponse[] = await publicClient.multicall({
@@ -72,10 +77,14 @@ export const getMainParams = async (
 
     const interest = localInterest
       ? localInterest
-      : Number(result.interestPerYear) / 100;
+      // : Number(result.interestPerYear) / 100;
+      : result
+      ? Number(result.interestPerYear) / 100
+      : 0;
 
     return {
       borrowFee: Number(result.borrowFee) / 100,
+      // borrowFee: result ? Number(result.borrowFee) / 100 : Number("0.25"),
       interest,
       liquidationFee: Number(result.liquidationFee) / 100,
       collateralPrice: BigNumber.from(result.collateralPrice),
